@@ -116,6 +116,38 @@
     footer {
       flex-basis: 85px;
     }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #1e2567;
+        color: white;
+      }
+
+      .prompt {
+        color: white;
+      }
+
+      .prompt:focus::placeholder {
+        color: #6069b0;
+      }
+
+      .button {
+        background: #101541;
+      }
+
+      .button:hover {
+        background: #0a0e32;
+      }
+
+      .button:active {
+        color: #939eff;
+      }
+
+      canvas {
+        opacity: 75%;
+      }
+    }
+
   </style>
 </head>
 
@@ -164,7 +196,7 @@
   <!-- App -->
   <script>
     // @ts-check
-    let clubId = location.pathname.slice(1) || "all";
+    let clubId = decodeURIComponent(location.pathname.slice(1)) || "all";
 
     let firebaseConfig = {
       apiKey: "AIzaSyDuRVej7P_dx_7RwOoV54n9HlXMqthoADI",
