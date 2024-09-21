@@ -287,22 +287,22 @@
     function init() {
       return {
         prompt: "",
-        loading: false,
+        loading: true,
         editing: false,
         /**
          * @type {any[]}
          */
         posts: [],
         placeholders: [
-          "What made you feel joy today?",
-          "Where's the joy coming from?",
-          "Share some joy! 😊",
-          "What is good in the world today?",
-          "What brightened your day?",
-          "From whence comes the joy?",
+          "🫘 Feeling joyful? Spill the beans... ",
+          "🧭 Where's the joy coming from?",
+          "📆 What is joyful today?",
+          "☀️ What is brightening your day?",
+          "😊 What is bringing you joy?",
           "What was 💯 today?",
-          `Share some joy with ${clubId}!`,
-          `Tell ${clubId} about some joy today`,
+          "😊 Share some joy!",
+          `🥳 Share some joy with /${clubId}!`,
+          `🎁 Be joyful with /${clubId}!`,
         ],
         async loadPosts() {
           this.loading = true;
@@ -321,7 +321,8 @@
           return this.placeholders[Math.floor(Math.random() * this.placeholders.length)];
         },
         currentPostText() {
-          return this.posts[0]?.fields.text?.stringValue ?? "";
+          if (this.loading) return "";
+          return this.posts[0]?.fields.text?.stringValue ?? `👋 You're the first person here!`;
         },
         async post() {
           if (this.editing) {
@@ -335,8 +336,6 @@
         }
       }
     }
-
-    window.init = init;
   </script>
 
   <!-- Particles -->
