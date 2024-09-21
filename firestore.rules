@@ -1,0 +1,24 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+  	match /clubs/{clubId}/posts/{postId} {
+      // Allow anyone to read posts
+      allow read: if true;
+
+      // Only allow authenticated users to post and only allow them to post
+      // under their own user id.
+      allow write: if
+        request.auth.uid != null &&
+        request.resource.data.text is string &&
+        request.resource.data.text.size() > 0 &&
+        request.resource.data.text.size() <= 100 &&
+        request.resource.id == request.auth.uid
+      ;
+    }
+  }
+}
