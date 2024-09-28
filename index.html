@@ -349,7 +349,7 @@
         },
         currentPostText() {
           if (this.loading) return "";
-          return this.posts[0]?.fields.text?.stringValue ?? `👋 You're the first person here!`;
+          return this.posts[0]?.fields?.text?.stringValue ?? `👋 You're the first person here!`;
         },
         async post() {
           if (this.editing) {
