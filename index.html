@@ -240,6 +240,10 @@
     let { userId, idToken, refreshToken, expiresAt } = localStorage;
 
     async function signInToFirebase() {
+      // Not sure how, but this can end up being `undefined` when it is saved
+      // into localstorage.
+      if (refreshToken === "undefined") refreshToken = undefined;
+
       // If we have a refresh token that hasn't expired, we can skip signing in.
       if (refreshToken && Date.now() < parseInt(expiresAt)) return;
 
